@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 return new class extends Migration
 {
     /**
@@ -11,10 +12,30 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
+        Schema::create('admin', function (Blueprint $table) {
+            $table->bigIncrements('admin_id')->primary();
             $table->string('name');
             $table->string('password');
+        });
+
+
+        Schema::create('client', function (Blueprint $table) {
+            $table->bigIncrements('client_id')->primary();
+            $table->string('name');
+            $table->string('contactno');
+            $table->string('address');
+        });
+
+
+        Schema::create('order', function (Blueprint $table) {
+            $table->bigIncrements('order_id')->primary();
+            $table->foreignId('client_id')->constrained('client');
+            $table->integer('qty');
+            $table->float('payable');
+            $table->timestamp('order_date');
+            $table->timestamp('pickup_date');
+            $table->tinyInteger('paid');
+            $table->tinyInteger('status');
         });
 
        
