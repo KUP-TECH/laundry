@@ -8,6 +8,12 @@ return [
         'icon'  => 'bi bi-grid-1x2',
         'route' => 'dashboard',
     ],
+    'order' => [
+        'name'  => 'order',
+        'title' => 'Orders',
+        'icon'  => 'bi bi-cart3',
+        'route' => 'table',
+    ],
     'table' => [
         'name'  => 'table',
         'title' => 'Table',
