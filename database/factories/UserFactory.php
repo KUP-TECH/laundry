@@ -30,4 +30,13 @@ class UserFactory extends Factory
     }
 
 
+    public function add($name, $password) {
+
+        return $this->state([
+            'name' => $name,
+            'password' => Hash::make($password),
+        ]);
+    }
+
+
 }
