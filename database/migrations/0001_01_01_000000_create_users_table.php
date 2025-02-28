@@ -20,7 +20,7 @@ return new class extends Migration
 
 
         Schema::create('client', function (Blueprint $table) {
-            $table->bigIncrements('client_id')->primary();
+            $table->bigIncrements('client_id')->index()->primary();
             $table->string('name');
             $table->string('contactno');
             $table->string('address');
@@ -29,13 +29,15 @@ return new class extends Migration
 
         Schema::create('order', function (Blueprint $table) {
             $table->bigIncrements('order_id')->primary();
-            $table->foreignId('client_id')->constrained('client');
+            $table->unsignedBigInteger('client_id');
             $table->integer('qty');
             $table->float('payable');
             $table->timestamp('order_date');
             $table->timestamp('pickup_date');
             $table->tinyInteger('paid');
             $table->tinyInteger('status');
+
+            $table->foreign('client_id')->references('client_id')->on('client')->onDelete('cascade');
         });
 
        
