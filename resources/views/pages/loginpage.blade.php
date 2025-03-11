@@ -76,15 +76,16 @@
                 </div>
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                   <p class="mb-4 text-sm mx-auto">
-                    Don't have an account?<span class="text-danger fw-bold fs-7"> Contact System Administrator </span>
+                    Don't have an account?<span class="text-warning fw-bold fs-7"> Contact System Administrator </span>
                   </p>
-                  <div class="my-1 px-2">
+                  <div class="my-1 px-4">
                     @if ($errors->any())
                       <div class=" text-danger text-center my-auto">
                         <ul class="my-auto py-auto">
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
+                            
                         </ul>
                       </div>
                     @endif

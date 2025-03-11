@@ -44,6 +44,7 @@
     <script src="{{ asset('vendor/soft-ui/js/plugins/smooth-scrollbar.min.js') }}"></script>
     <script src="{{ asset('vendor/soft-ui/js/plugins/chartjs.min.js') }}"></script>
     <script src="{{ asset('vendor/soft-ui/js/soft-ui-dashboard.min.js?v=1.1.0') }}"></script>
+    
 
 </head>
 
@@ -65,7 +66,7 @@
 
 
             <li class="nav-item my-1">
-                <a class="nav-link  active" href="../pages/dashboard.html">
+                <a class="nav-link  active" href="{{ $d['route'] }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="{{$d['icon']}} fs-6 opacity-8 text-white"></i>
                     </div>

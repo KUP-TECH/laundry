@@ -101,8 +101,10 @@
             </div>
         </div>
     </div>
-
-
+     
+        
+      
+    
 
     <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");

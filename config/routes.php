@@ -12,7 +12,7 @@ return [
         'name'  => 'order',
         'title' => 'Orders',
         'icon'  => 'bi bi-cart3',
-        'route' => 'table',
+        'route' => 'orders',
     ],
     'table' => [
         'name'  => 'table',

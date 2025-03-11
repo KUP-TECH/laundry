@@ -8,5 +8,7 @@ class OrderController extends Controller
 {
     public function index() {
         
+
+        return view("pages.order.view", ['active_link' => 'Dashboard']);
     }
 }
