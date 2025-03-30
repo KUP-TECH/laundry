@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="col">
-                            <p class="fs-5 fw-bold text-white opacity-10 border-bottom">Fullfilled</p>
+                            <p class="fs-5 fw-bold text-white opacity-10 border-bottom">Paid</p>
                             <p class="fs-5 text-white opacity-10">15</p>
                         </div>
                     </div>

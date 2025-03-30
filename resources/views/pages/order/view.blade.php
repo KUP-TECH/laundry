@@ -34,7 +34,7 @@
                             <th>ID</th>
                             <th>Client</th>
                             <th>Weigth</th>
-                            <th>Payable</th>
+                            <th>Status</th>
                             <th>Date</th>
                         </tr>
                     </thead>
