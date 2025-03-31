@@ -2,7 +2,18 @@
 
 
     <div class="container-fluid row px-2">
-
+      <div class="row">
+      
+        <div class="col-md-12 mb-2">
+          <div class="d-md-flex align-items-center mb-3 mx-2">
+            <div class="mb-md-0 mb-3">
+              <h3 class="font-weight-bold mb-0">Today's</h3>
+              <p class="mb-0">Date: {{ $table['today'] }}</p>
+            </div>
+          </div>
+        </div>
+      
+      </div>
 
         <div class="col">
             <div class="card">
@@ -19,7 +30,7 @@
 
                         <div class="col">
                             <p class="fs-5 fw-bold text-white border-bottom opacity-10">Orders</p>
-                            <p class="fs-5 text-white opacity-10">145</p>
+                            <p class="fs-5 text-white opacity-10">{{ $table['count'][0] }}</p>
                         </div>
                     
                     </div>
@@ -43,7 +54,7 @@
 
                         <div class="col">
                             <p class="fs-5 fw-bold text-white opacity-10 border-bottom">Pending</p>
-                            <p class="fs-5 text-white opacity-10">15</p>
+                            <p class="fs-5 text-white opacity-10">{{ $table['pending'] }}</p>
                         </div>
                     
                     </div>
@@ -68,7 +79,7 @@
 
                         <div class="col">
                             <p class="fs-5 fw-bold text-white opacity-10 border-bottom">Paid</p>
-                            <p class="fs-5 text-white opacity-10">15</p>
+                            <p class="fs-5 text-white opacity-10">{{ $table['completed'] }}</p>
                         </div>
                     </div>
                     
@@ -85,196 +96,176 @@
 
 
         <div class="row">
-            <div class="col-7">
+            <div class="col-12">
 
-                <div class="card">
-                    <span class="mask opacity-10 border-radius-lg"></span>
-                    <div class="card-body position-relative">
-                        <p class="fs-5 fw-bold text-dark border-bottom">Sales</p>
+              <div class="card">
+                  <span class="mask opacity-10 border-radius-lg"></span>
+                  <div class="card-body position-relative">
+                      <p class="fs-5 fw-bold text-dark border-bottom">Orders</p>
 
-                        <div class="chart">
-                            <canvas id="chart-bars" class="chart-canvas" height="450"></canvas>
-                        </div>
-                    </div>
-                </div>
+                      <div class="chart">
+                          <canvas id="chart-bars" class="chart-canvas" height="80" width="auto"></canvas>
+                      </div>
+                  </div>
+              </div>
                 
             </div>
         </div>
+
+        <div class="row my-2">
+          <div class="col-12">
+        
+            <div class="card">
+              <span class="mask opacity-10 border-radius-lg"></span>
+              <div class="card-body position-relative">
+                <p class="fs-5 fw-bold text-dark border-bottom">Sales</p>
+        
+                <div class="chart">
+                  <canvas id="chart-bars-2" class="chart-canvas" height="80" width="auto"></canvas>
+                </div>
+              </div>
+            </div>
+        
+          </div>
+        </div>
     </div>
      
-        
+    
       
     
 
     <script>
-    var ctx = document.getElementById("chart-bars").getContext("2d");
 
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Sales",
-          tension: 0.4,
-          borderWidth: 0,
-          borderRadius: 4,
-          borderSkipped: false,
-          backgroundColor: "#000000",
-          data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-          maxBarThickness: 6
-        }, ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
+      let data = @json($table);
+      console.log(data);
+
+      let ctx = document.getElementById("chart-bars").getContext("2d");
+      let ctx2 = document.getElementById("chart-bars-2").getContext("2d");
+
+      new Chart(ctx, {
+        type: "bar",
+
+        data: {
+          labels: data.date,
+          datasets: [
+            {
+              label: "Order",
+              backgroundColor: "#377dff",
+              borderColor: "#ffffff",
+              data: data.count,
+              borderWidth: 1
             },
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 500,
+
+          ]
+        },
+        options: {
+          scales: {
+            x: {
+              ticks: {
+                color: "#FF5733", // X-axis text color
+                font: { size: 14 }
+              },
+              grid: {
+                color: "white",
+              }
+            },
+            y: {
+              ticks: {
+                color: "#33FF57", // Y-axis text color
+                font: { size: 14 }
+              },
+              grid: {
+                color: "white",
+              },
               beginAtZero: true,
-              padding: 15,
-              font: {
-                size: 14,
-                family: "Inter",
-                style: 'normal',
-                lineHeight: 2
-              },
-              color: "#000000"
-            },
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false
-            },
-            ticks: {
-              display: false
-            },
-          },
-        },
-      },
-    });
-
-
-    var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-    var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-    var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
-    new Chart(ctx2, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-            label: "Mobile apps",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#cb0c9f",
-            borderWidth: 3,
-            backgroundColor: gradientStroke1,
-            fill: true,
-            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-            maxBarThickness: 6
-
-          },
-          {
-            label: "Websites",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#3A416F",
-            borderWidth: 3,
-            backgroundColor: gradientStroke2,
-            fill: true,
-            data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-            maxBarThickness: 6
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#b2b9bf',
-              font: {
-                size: 11,
-                family: "Inter",
-                style: 'normal',
-                lineHeight: 2
-              },
             }
           },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
+          plugins: {
+            legend: {
+              labels: {
+                color: "#007bff", // Legend text color
+                font: { size: 14 }
+              }
             },
-            ticks: {
+            title: {
               display: true,
-              color: '#b2b9bf',
-              padding: 20,
-              font: {
-                size: 11,
-                family: "Inter",
-                style: 'normal',
-                lineHeight: 2
-              },
+              text: "Orders for the last 7 days",
+              color: "#ff9900", // Title text color
+              font: { size: 18 }
+            },
+            tooltip: {
+              bodyColor: "#FFFFFF", // Tooltip text color
+              titleColor: "#FFD700", // Tooltip title color
+              backgroundColor: "#333333" // Tooltip background color
             }
           },
         },
-      },
-    });
+
+
+      });
+
+
+      new Chart(ctx2, {
+            type: "bar",
+        
+            data: {
+                labels: data.date,
+                datasets: [
+                    {
+                        label: "Pesos",
+                        backgroundColor: "#00ddff",
+                        borderColor: "#ffffff",
+                        data: data.ammount,
+                        borderWidth: 1
+                    },
+                   
+                ]
+            },
+            options: {
+                scales: {
+                    x: {
+                        ticks: {
+                            color: "#FF5733", // X-axis text color
+                            font: { size: 14 }
+                        },
+                        grid: {
+                            color: "white",
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: "#33FF57", // Y-axis text color
+                            font: { size: 14 }
+                        },
+                        grid: {
+                            color: "white",
+                        },
+                        beginAtZero: true,
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: "#007bff", // Legend text color
+                            font: { size: 14 }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: "Ammounts for the last 7 days",
+                        color: "#ff9900", // Title text color
+                        font: { size: 18 }
+                    },
+                    tooltip: {
+                        bodyColor: "#FFFFFF", // Tooltip text color
+                        titleColor: "#FFD700", // Tooltip title color
+                        backgroundColor: "#333333" // Tooltip background color
+                    }
+                },
+            },
+
+            
+        });
   </script>
 
 </x-basedashboard>

@@ -106,10 +106,11 @@
     <div class="container">
       <div class="row">
         <div class="col-8 mx-auto text-center mt-1">
+          <img src="{{ asset('assets/img/kuptech-icon.png') }}" style="width: 35px; height: 35px;">
           <p class="mb-0 text-secondary">
             Copyright © <script>
               document.write(new Date().getFullYear())
-            </script> <a href="https://github.com/LydianJay" class="font-weight-bold" target="_blank"> {{ config('const.provider') }}</a>
+            </script> <a href="https://kuptech.lyncxus.online/" class="font-weight-bold" target="_blank"> {{ config('const.provider') }}</a>
           </p>
         </div>
       </div>

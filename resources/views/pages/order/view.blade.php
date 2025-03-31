@@ -88,6 +88,7 @@
                                 <span class="fw-bold">Contact No.:</span> {{ $order->contactno }}
                             </p>
                             <input type="hidden" name="order_id" value="{{ $order->order_id }}">
+                            <input type="hidden" name="order_contactno" value="{{ $order->contactno }}">
 
                             <label for="" class="form-label my-0">Payable</label>
                             <div class="input-group mb-2">

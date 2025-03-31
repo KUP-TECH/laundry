@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SMSHandler;
 use Illuminate\Http\Request;
 use App\Models\OrderModel;
 use Carbon\Carbon;
@@ -61,7 +62,7 @@ class OrderController extends Controller
     }
 
 
-    public function set_status(Request $request) {
+    public function set_status(Request $request, SMSHandler $smshandler) {
         $data   = $request->all();
         $order  = OrderModel::find($data['order_id']);
         $paid   = (float)$data['payable'];
@@ -71,14 +72,19 @@ class OrderController extends Controller
 
         $order->paid        = $paid <= 0 ? 1 : $status;
 
-        if($status == 1) {
-            $order->payable = 0;
-        }
-
         $order->status      = $data['job'];
         $order->pickup_date = Carbon::now();
 
         $order->save(); 
+
+        if($status == 1){
+            $sms_result = $smshandler->sendSMS($data['order_contactno'], config('sms.sms_send'));
+            
+            if(!$sms_result['status']){
+                $sms_status = $sms_result['status'];
+                redirect()->route('orders')->with('success', "Order status updated successfully: $sms_status");
+            }
+        }
 
         return redirect()->route('orders')->with('success', 'Order status updated successfully');
     }

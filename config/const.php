@@ -2,5 +2,5 @@
 
 return [
     'title'     => 'K-TECH Laundry',
-    'provider'  => 'KUP-TECH TEAM',
+    'provider'  => 'KUP-TECH DEV TEAM',
 ];
