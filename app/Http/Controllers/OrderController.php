@@ -65,10 +65,16 @@ class OrderController extends Controller
         $data   = $request->all();
         $order  = OrderModel::find($data['order_id']);
         $paid   = (float)$data['payable'];
+        $status = (int)$data['paid'];
         $order->payable     = $paid;
 
 
-        $order->paid        = $paid <= 0 ? 1 : (int)$data['paid'];
+        $order->paid        = $paid <= 0 ? 1 : $status;
+
+        if($status == 1) {
+            $order->payable = 0;
+        }
+
         $order->status      = $data['job'];
         $order->pickup_date = Carbon::now();
 
