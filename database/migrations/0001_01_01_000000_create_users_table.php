@@ -17,27 +17,18 @@ return new class extends Migration
             $table->string('name');
             $table->string('password');
         });
-
-
-        Schema::create('client', function (Blueprint $table) {
-            $table->bigIncrements('client_id')->index()->primary();
-            $table->string('name');
-            $table->string('contactno');
-            $table->string('address');
-        });
-
+        
 
         Schema::create('order', function (Blueprint $table) {
             $table->bigIncrements('order_id')->primary();
-            $table->unsignedBigInteger('client_id');
-            $table->integer('qty');
-            $table->float('payable');
-            $table->timestamp('order_date');
-            $table->timestamp('pickup_date');
-            $table->tinyInteger('paid');
-            $table->tinyInteger('status');
-
-            $table->foreign('client_id')->references('client_id')->on('client')->onDelete('cascade');
+            $table->string('name');
+            $table->string('contactno');
+            $table->integer('weight')->default(0);
+            $table->float('payable')->default(0);
+            $table->timestamp('order_date')->useCurrent();
+            $table->timestamp('pickup_date')->nullable()->default(null);
+            $table->tinyInteger('paid')->default(0);
+            $table->enum('status', ['pending', 'processing', 'completed'])->default('pending');
         });
 
        

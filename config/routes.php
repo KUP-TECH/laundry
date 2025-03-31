@@ -14,10 +14,10 @@ return [
         'icon'  => 'bi bi-cart3',
         'route' => 'orders',
     ],
-    'table' => [
-        'name'  => 'table',
-        'title' => 'Table',
-        'icon'  => 'bi bi-table',
-        'route' => 'table',
-    ],
+    // 'table' => [
+    //     'name'  => 'table',
+    //     'title' => 'Table',
+    //     'icon'  => 'bi bi-table',
+    //     'route' => 'table',
+    // ],
 ];

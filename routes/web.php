@@ -15,5 +15,8 @@ Route::get('/logout', [LoginController::class,'logout'])->name('logout');
 Route::middleware(['auth:web'])->group(function (){
     Route::get("/dashboard", [DashboardController::class,"index"])->name("dashboard");
     Route::get("/orders", [OrderController::class,"index"])->name("orders");
-    Route::get("/table", [TableController::class,"index"])->name( "table");
+
+
+    Route::post("/add_order", [OrderController::class,"add_order"])->name("add_order");
+    Route::post("/set_status", [OrderController::class,"set_status"])->name("set_status");
 });

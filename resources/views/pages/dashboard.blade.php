@@ -11,7 +11,7 @@
 
                     <div class="row">
                         <div class="col-lg-3 d-flex justify-content-center align-items-center">
-                            <div class="container d-flex flex-column bg-white border-radius-md">
+                            <div class="container d-flex flex-column bg-white border-radius-md justify-content-center align-items-center">
                                 <i class="bi bi-clipboard-data opacity-8 fs-1 text-primary"></i>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                     <div class="row">
 
                         <div class="col-lg-3 d-flex justify-content-center align-items-center">
-                            <div class="container d-flex flex-column bg-white border-radius-md">
+                            <div class="container d-flex flex-column bg-white border-radius-md justify-content-center align-items-center">
                                 <i class="bi bi-clipboard2-x opacity-8 fs-1 text-secondary"></i>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
 
                     
                         <div class="col-lg-3 d-flex justify-content-center align-items-center">
-                            <div class="container d-flex flex-column bg-white border-radius-md">
+                            <div class="container d-flex flex-column bg-white border-radius-md justify-content-center align-items-center">
                                 <i class="bi bi-clipboard2-check opacity-8 fs-1 text-success"></i>
                             </div>
                         </div>
